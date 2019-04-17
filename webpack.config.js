@@ -1,18 +1,33 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const nodeExternals = require('webpack-node-externals');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-	entry: './src/app.js',
+	entry: [
+		'./index.js',
+		'./client/main.js'
+	],
 	output: {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	mode: 'development',
+	target: 'node',
+	externals: [nodeExternals()],
 	devtool: 'eval-source-map',
 	watch: true,
 	module: {
-		rules: [{
+		rules: [
+			// {
+			// 	test: /\.css$/,
+			// 	use: ExtractTextPlugin.extract({
+			// 		fallback: "style-loader",
+			// 		use: "css-loader"
+			// 	}),
+			// },
+			{
 			test: /\.m?js$/,
 			exclude: /(node_modules)/,
 			use: {
@@ -27,10 +42,10 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './index.html',
-			title: 'Custom template using Handlebars'
+			title: 'Cinema APP'
 		}),
-		new BundleAnalyzerPlugin()
-	], 
+		// new ExtractTextPlugin("styles.css"),
+	],
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		port: 9000
