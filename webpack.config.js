@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -14,8 +13,6 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 	},
 	mode: 'development',
-	target: 'node',
-	externals: [nodeExternals()],
 	devtool: 'eval-source-map',
 	watch: true,
 	module: {
